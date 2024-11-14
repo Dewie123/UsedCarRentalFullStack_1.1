@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_admin_logged_in_create_user.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+
+                <li><a href="{{ url_for('render_admin_logged_in_page') }}">Manage Users</a></li>
+                <li><a href="{{ url_for('render_admin_logged_in_manage_listing_page') }}">Manage Listings</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- User Management Section -->
+        <section class="registration-container">
+            <h1>Create an Account</h1>
+            <form action="/admin_register_user" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="phone_number" name="phone_number">
+                </div>
+                <div class="form-group">
+                    <label>Who you are registering as:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="user_type" value="1"> Buyer</label>
+                        <label><input type="radio" name="user_type" value="2"> Individual Seller</label>
+                        <label><input type="radio" name="user_type" value="3"> Dealership</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="images" class="upload-label">Profile Picture:</label>
+                    <div class="upload-container">
+                        <input type="file" id="images" name="images" accept="image/*" multiple onchange="previewImages()">
+                        <div id="imagePreview" class="image-preview"></div>
+                    </div>
+                </div>
+        
+                <button type="submit" class="register-btn">Register</button>
+                <script src="{{ url_for('static', filename='scripts_register.js') }}"></script>
+            </form>
+        </section>
+        
+
+
+        
+
+        <!-- Reports Section (Optional) -->
+        
+    </main>
+
+    
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script_admin_logged_in.js') }}"></script>
+    
+
+</body>
+</html>

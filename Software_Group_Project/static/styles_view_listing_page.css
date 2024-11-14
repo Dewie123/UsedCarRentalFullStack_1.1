@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav ul li {
+    margin-right: 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+table {
+    width: 40%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Image gallery container */
+.image-gallery {
+    width: 50%;
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+/* Large image styling */
+#largeImage {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Thumbnail gallery styling */
+.thumbnail-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+.thumbnail-gallery img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.thumbnail-gallery img:hover {
+    border: 2px solid #007bff;
+}
+
+/* Dropdown styles */
+.shortlisted-cart {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 1px solid #ccc;
+    z-index: 1;
+}
+.dropdown-content.show {
+    display: block; /* Shows when the "show" class is added */
+}
+
+
+footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+    background-color: #f1f1f1; /* Optional: Add a background color */
+    text-align: center; /* Center text */
+    padding: 10px 0; /* Optional: Add padding for spacing */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: #000;
+    cursor: pointer;
+}

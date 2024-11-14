@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_index.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+                {% if session['user_type'] in [3] %}
+                    <li><a href="{{ url_for('create_listing') }}">Create Listing</a></li>
+                {% endif %}
+                {% if session['user_type'] in [2] %}
+                    <li><a href="{{ url_for('submit_dealership') }}">Submit to Dealership</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('loan_calculator_page') }}">Loan Calculator</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                <li><a href="{{ url_for('load_seller_profile') }}">View Profile</a></li>
+                {% if session['user_type'] in [1] %}
+                <div class="shortlisted-cart">
+                    <button id="shortlistedCartBtn" onclick="toggleDropdown()">Shortlisted Cart</button>
+                    <div id="shortlistedDropdown" class="dropdown-content">
+                        <div id="shortlistedItems"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Find Your Dream Rental!</h1>
+    </section>
+
+    <div class="filter-container">
+        <!-- Form Start -->
+        <form action="/search" method="POST"> <!-- Change "/search" to your Flask route -->
+    
+            <!-- Tab Menu -->
+            <div class="tab-menu">
+                <a class="active">Used Cars</a>
+            </div>
+    
+            <!-- Filter Options -->
+            <div class="filter-group">
+                <!-- Car Make/Model -->
+                <div class="filter-item">
+                    <input type="text" name="car_model" placeholder="Car Model">
+                </div>
+                <!-- Min Price -->
+                <div class="filter-item">
+                    <input type="number" name="min_price" placeholder="Min Price" step="0.01" min="0">
+                </div>
+                <!-- Max Price -->
+                <div class="filter-item">
+                    <input type="number" name="max_price" placeholder="Max Price" step="0.01" min="0">
+                </div>
+            </div>
+    
+            <!-- More Filters Row -->
+            <div class="filter-group">
+                <!-- Depreciation -->
+                <div class="filter-item">
+                    <select name="depreciation">
+                        <option value="" disabled selected>Depreciation</option>
+                        <option value="7000">Below $7k/yr</option>
+                        <option value="8000">Below $8k/yr</option>
+                        <option value="9000">Below $9k/yr</option>
+                        <option value="10000">Below $10k/yr</option>
+                        <option value="11000">Below $11k/yr</option>
+                        <option value="12000">Below $12k/yr</option>
+                        <option value="13000">Below $13k/yr</option>
+                        <option value="14000">Below $14k/yr</option>
+                        <option value="15000">Below $15k/yr</option>
+                        <option value="16000">Below $16k/yr</option>
+                        <option value="17000">Below $17k/yr</option>
+                        <option value="18000">Any</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <!-- Register Date -->
+                <div class="filter-item">
+                    <select name="reg_date">
+                        <option value="" disabled selected>Register Date</option>
+                        <option value="2024-12-31">2024</option>
+                        <option value="2023-12-31">2023</option>
+                        <option value="2022-12-31">2022</option>
+                        <option value="2021-12-31">2021</option>
+                        <option value="2020-12-31">2020</option>
+                        <option value="2019-12-31">2019</option>
+                        <option value="2018-12-31">2018</option>
+                        <option value="2017-12-31">2017</option>
+                        <option value="2016-12-31">2016</option>
+                        <option value="2015-12-31">2015</option>
+                        <option value="2014-12-31">2014</option>
+                        <option value="2013-12-31">2013 and older</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+            </div>
+    
+            <!-- Search Button -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button type="submit" class="search-button">Search</button>
+            </div>
+    
+        </form>
+        <!-- Form End -->
+    </div>
+    
+
+    
+    <section class="content-section">
+        <h2>Latest Car Listings</h2>
+        <div class="car-listings-container">
+            <div class="car-listings">
+                {% for listing in normal_listings %}
+                <a href="{{ url_for('view_listing', listing_id=listing['id']) }}"> <!-- Link to detail page -->
+                    <div class="car-listing">
+                        
+                        <img src="{{ url_for('static', filename=listing['image_path'].replace('static/', '').replace('\\', '/') ) }}" class="car-image">
+
+                        <h3>{{ listing['carName'] }}</h3>
+                        <p>${{ listing['price'] }}</p>
+                        
+                    </div>
+                {% else %}
+                    <p>No normal listings available.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Premium Listings Section -->
+        <h2>Bumped Car Listings</h2>
+        <div class="carousel">
+            <div class="carousel-container">
+                {% for listing in premium_listings %}
+                <a href="{{ url_for('view_listing', listing_id=listing['id']) }}"> <!-- Link to detail page -->
+                    <div class="car-listing-star">
+                        
+                        <img src="{{ url_for('static', filename=listing['image_path'].replace('static/', '').replace('\\', '/') ) }}" class="car-image">
+
+
+                        <h3>{{ listing['carName'] }}</h3>
+                        <p>${{ listing['price'] }}</p>
+                        
+                    </div>
+                {% else %}
+                    <p>No premium listings available.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h2>Our Dealerships</h2>
+        <div id="car-listings-container">
+            {% if dealership_info %}
+                <div class="car-listings">
+                    {% for dealership in dealership_info %}
+                        <div class="car-listing">
+                            <!-- Link to the seller profile -->
+                            <a href="{{ url_for('load_dealer_profile', user_id = dealership[5]) }}">
+                                <img src="{{ dealership[4] }}" alt="{{ dealership[0] }}" class="dealership-image">
+                            </a>
+                            <h3>{{ dealership[0] }}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No dealerships available at the moment.</p>
+            {% endif %}
+        </div>
+        
+    
+        <script src="{{ url_for('static', filename='script_index.js') }}"></script>
+        
+    </section>
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

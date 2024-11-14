@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='loan_calculator_page.css') }}"> 
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('create_listing') }}">Create Listing</a></li>
+                <li><a href="{{ url_for('loan_calculator_page') }}">Loan Calculator</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Loan Calculator Section -->
+    <main>
+        <div class="container">
+            <h1>Calculate Your Car Loan Savings</h1>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="loanAmount">Loan Amount</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="loanAmount" placeholder="Enter loan amount" />
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="loanTerm">Loan Term</label>
+                    <select id="loanTerm">
+                        <option value="12">12 months</option>
+                        <option value="24">24 months</option>
+                        <option value="36">36 months</option>
+                        <option value="48">48 months</option>
+                        <option value="60">60 months</option>
+                        <option value="72">72 months</option>
+                        <option value="84">84 months</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="interest-rates">
+                <div class="rate-option" onclick="selectRate('personal', 2.48, 2.48)">
+                    <p><strong>Personal Use</strong></p>
+                    <p>Smart Loan: 2.48%</p>
+                    <p>Typical Bank: 2.48%</p>
+                </div>
+                <div class="rate-option" onclick="selectRate('renewed', 2.75, 2.88)">
+                    <p><strong>Cars with renewed COE</strong></p>
+                    <p>Smart Loan: 2.75%</p>
+                    <p>Typical Bank: 2.88%</p>
+                </div>
+                <div class="rate-option" onclick="selectRate('private', 3.18, 3.28)">
+                    <p><strong>Private Hire Use</strong></p>
+                    <p>Smart Loan: 3.18%</p>
+                    <p>Typical Bank: 3.28%</p>
+                </div>
+            </div>
+
+            <p id="savingsText" class="savings">You will save $0 with us!</p>
+
+            <div class="result-section">
+                <div class="loan-box">
+                    <h3>Direct with Our Loan</h3>
+                    <p id="monthlyInstalment1" class="highlight">$0</p>
+                    <p class="small-text">Your monthly installment</p>
+                    <p id="totalPaid1" class="small-text">Total Paid on Loan: $0</p>
+                </div>
+
+                <div class="loan-box">
+                    <h3>Typical Bank Loan</h3>
+                    <p id="monthlyInstalment2" class="highlight">$0</p>
+                    <p class="small-text">Your monthly installment</p>
+                    <p id="totalPaid2" class="small-text">Total Paid on Loan: $0</p>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="apply-button">Apply Loan</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='loan_calculator_page.js') }}"></script>
+</body>
+</html>

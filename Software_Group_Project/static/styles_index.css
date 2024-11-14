@@ -1,0 +1,239 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav ul li {
+    margin-right: 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.hero-section {
+    background-image: url('https://example.com/hero-image.jpg'); /* Replace with actual image URL */
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-section h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+.content-section {
+    padding: 20px;
+    margin-left : 500px;
+}
+.content-section h2 {
+    color: #333;
+}
+.car-listings-container {
+    display: flex;
+    align-items: center; /* Center the arrows vertically */
+    overflow: hidden; /* Hide overflow */
+    position: relative; /* Positioning context for arrows */
+}
+
+.car-listings {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: flex-start; 
+}
+.car-listing {
+    background-color: #f9f9f9; 
+    padding: 10px;
+    text-align: center; 
+    width: 250px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+/*
+.car-listings {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: flex-start; 
+}
+.car-listing {
+    background-color: #f9f9f9; 
+    padding: 10px;
+    text-align: center; 
+    width: 250px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+*/
+
+.car-listing img {
+    max-width: 100%;
+    height: auto;
+}
+.car-listing h3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+.car-listing p {
+    font-size: 1rem;
+    color: #777;
+}
+
+.filter-container {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.tab-menu {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    border-radius: 30px;
+    padding: 5px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.tab-menu a {
+    text-align: center;
+    flex: 1;
+    padding: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+}
+
+.tab-menu a.active {
+    background-color: #fff;
+    color: #333;
+    font-weight: bold;
+}
+
+.tab-menu a:hover {
+    background-color: #555;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 10px;
+    max-width: auto;
+    position: relative;
+}
+
+.filter-item input, .filter-item select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.filter-item input:focus, .filter-item select:focus {
+    border-color: #333;
+}
+
+.search-button {
+    background-color: #ff5555;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #ff3333;
+}
+
+.carousel {
+    position: relative;
+    width: 400px; /* Set this to the max-width of .car-listing-star */
+    height: auto; /* Adjust height to fit your content */
+    overflow: hidden; /* Hide overflow for smooth transition */
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.car-listing-star {
+    min-width: 100%; /* Each listing takes the full width of the carousel */
+    box-sizing: border-box; /* Ensure padding/margin included in width */
+    padding: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+.car-image {
+    width: 250px; /* Set a fixed width for all images */
+    height: 150px; /* Set a fixed height for all images */
+    object-fit: cover; /* Ensure images cover the specified dimensions without distortion */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+.shortlisted-cart {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 1px solid #ccc;
+    z-index: 1;
+}
+.dropdown-content.show {
+    display: block; /* Shows when the "show" class is added */
+}
+
+footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+    background-color: #f1f1f1; /* Optional: Add a background color */
+    text-align: center; /* Center text */
+    padding: 10px 0; /* Optional: Add padding for spacing */
+}

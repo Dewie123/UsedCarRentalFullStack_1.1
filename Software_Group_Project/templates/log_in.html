@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_log_in.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('loan_calculator_page') }}">Loan Calculator</a></li>
+                <li><a href="#">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>Select an option:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="user_type" value="1" required> Buyer</label>
+                    <label><input type="radio" name="user_type" value="2" required> Individual Seller</label>
+                    <label><input type="radio" name="user_type" value="3" required> Dealership</label>
+                    <label><input type="radio" name="user_type" value="4" required> Admin</label>
+                </div>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

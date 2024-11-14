@@ -1,0 +1,181 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+nav ul li {
+    margin-right: 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    width: 200px; /* Adjust label width for better alignment */
+    font-weight: bold;
+}
+
+input[type="file"] {
+    width: 100%;  /* Full width for file input */
+}
+
+input, select {
+    width: 30%; /* Adjust width to prevent stretching */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #333;
+    outline: none;
+}
+
+button {
+    width: 20%;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Listing Type Button Styles */
+.listing-options {
+    width: 70%;  /* Align with input fields */
+    color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.listing-btn {
+    width: 48%;  /* Two buttons side by side */
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: #000;
+}
+
+.listing-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.listing-btn.selected {
+    background-color: #d0ffd0;  /* Change to your preferred color */
+    border-color: #a0d0a0;  /* Optional: change border color */
+}
+.image-preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.image-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column;  /* Stack input and preview vertically */
+    align-items: flex-end;  /* Align items to the right */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Styling for each cell to keep everything in one line */
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.attribute-name {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.attribute-value {
+    color: #333;
+}
+
+.highlight {
+    color: #007bff;
+}
+
+.link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+footer {
+    margin-top: auto; /* Pushes the footer to the bottom */
+    background-color: #f1f1f1; /* Optional: Add a background color */
+    text-align: center; /* Center text */
+    padding: 10px 0; /* Optional: Add padding for spacing */
+}

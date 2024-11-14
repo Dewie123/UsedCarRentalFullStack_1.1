@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_admin_logged_in.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+                
+                <li><a href="{{ url_for('render_admin_logged_in_create_user_page') }}">Register User Account</a></li>
+                <li><a href="{{ url_for('render_admin_logged_in_page') }}">Manage Users</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+
+        <!-- Listings Management Section -->
+        <section id="manage-listings">
+            <h2>Manage Listings</h2>
+            <input type="text" placeholder="Search listings..." id="listing-search"> <!-- Search bar -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Listing Image</th>
+                        <th>Listing ID</th>
+                        <th>Car Name</th>
+                        <th>Price</th>
+                        <th>Mileage</th>
+                        <th>Depreciation</th>
+                        <th>Road Tax</th>
+                        <th>Dereg Value</th>
+                        <th>COE</th>
+                        <th>Engine Capacity</th>
+                        <th>Curb Weight</th>
+                        <th>Vehicle Type</th>
+                        <th>Reg Date</th>
+                        <th>Manufactured</th>
+                        <th>Transmission</th>
+                        <th>OMV</th>
+                        <th>ARF</th>
+                        <th>Power</th>
+                        <th># of Owners</th>
+                        <th>Dealership</th>
+                        <th>Seller</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for listing in listings %}
+                    <tr id="listing-{{ listing[0] }}">
+                        <td class="editable-image">
+                            {% for image in listing[20].split(',') %}
+                            <img src="{{ image }}" alt="Listing Image" width="50" height="50" style="margin-right: 5px;">
+                            {% endfor %}
+                        </td>
+                        <td class="editable" data-field="listing_id">{{ listing[0] }}</td>
+                        <td class="editable" data-field="car_name">{{ listing[1] }}</td>
+                        <td class="editable" data-field="price">{{ listing[2] }}</td>
+                        <td class="editable" data-field="mileage">{{ listing[3] }}</td>
+                        <td class="editable" data-field="depreciation">{{ listing[4] }}</td>
+                        <td class="editable" data-field="road_tax">{{ listing[5] }}</td>
+                        <td class="editable" data-field="dereg_value">{{ listing[6] }}</td>
+                        <td class="editable" data-field="coe">{{ listing[7] }}</td>
+                        <td class="editable" data-field="engine_capacity">{{ listing[8] }}</td>
+                        <td class="editable" data-field="curb_weight">{{ listing[9] }}</td>
+                        <td class="editable" data-field="vehicle_type">{{ listing[10] }}</td>
+                        <td class="editable" data-field="reg_date">{{ listing[11] }}</td>
+                        <td class="editable" data-field="manufactured">{{ listing[12] }}</td>
+                        <td class="editable" data-field="transmission">{{ listing[13] }}</td>
+                        <td class="editable" data-field="omv">{{ listing[14] }}</td>
+                        <td class="editable" data-field="arf">{{ listing[15] }}</td>
+                        <td class="editable" data-field="power">{{ listing[16] }}</td>
+                        <td class="editable" data-field="owners">{{ listing[17] }}</td>
+                        <td class="editable" data-field="dealership">{{ listing[18] }}</td>
+                        <td class="editable" data-field="seller">{{ listing[19] }}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="save-btn" style="display: none;">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        
+
+        <!-- Reports Section (Optional) -->
+        
+    </main>
+
+    
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script_admin_logged_in_two.js') }}"></script>
+
+</body>
+</html>

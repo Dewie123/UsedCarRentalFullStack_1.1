@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_create_listing_seller.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('loan_calculator_page') }}">Loan Calculator</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Modify Car Listing</h1>
+        <form action="{{ url_for('modify_listing', listing_id=listing.id) }}" method="POST" enctype="multipart/form-data">  <!-- Added enctype -->
+    
+            <div class="form-group">
+                <label for="listing_type">Listing Type</label>
+                <input type="hidden" name="listing_type" id="listing_type" value="{{ listing.listing_type }}">
+                <div class="listing-options">
+                    <button type="button" id="normal_listing" class="listing-btn" onclick="selectListingType('normal')">Normal Listing</button>
+                    <button type="button" id="premium_listing" class="listing-btn" onclick="selectListingType('premium')">Premium Listing</button>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="sellerName">Name of Seller:</label>
+                <input type="text" id="sellerName" name="sellerName" value="{{ listing.sellerName }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="carName">Name of Vehicle:</label>
+                <input type="text" id="carName" name="carName" value="{{ listing.carName }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" value="{{ listing.price }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="depreciation">Depreciation:</label>
+                <input type="number" id="depreciation" name="depreciation" value="{{ listing.depreciation }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="mileage">Mileage:</label>
+                <input type="number" id="mileage" name="mileage" value="{{ listing.mileage }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="roadTax">Road Tax:</label>
+                <input type="number" id="roadTax" name="roadTax" value="{{ listing.roadTax }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="deregValue">Dereg Value:</label>
+                <input type="number" id="deregValue" name="deregValue" value="{{ listing.deregValue }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="coe">COE:</label>
+                <input type="number" id="coe" name="coe" value="{{ listing.coe }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="engineCap">Engine Capacity (cc):</label>
+                <input type="number" id="engineCap" name="engineCap" value="{{ listing.engineCap }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="curbWeight">Curb Weight (kg):</label>
+                <input type="number" id="curbWeight" name="curbWeight" value="{{ listing.curbWeight }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="vehicleType">Type of Vehicle:</label>
+                <input type="text" id="vehicleType" name="vehicleType" value="{{ listing.vehicleType }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="regDate">Registration Date:</label>
+                <input type="date" id="regDate" name="regDate" value="{{ listing.regDate }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="manufactured">Manufactured Year:</label>
+                <input type="number" id="manufactured" name="manufactured" value="{{ listing.manufactured }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="transmission">Transmission:</label>
+                <select id="transmission" name="transmission">
+                    <option value="auto" {% if listing.transmission == 'auto' %}selected{% endif %}>Auto</option>
+                    <option value="manual" {% if listing.transmission == 'manual' %}selected{% endif %}>Manual</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="omv">OMV:</label>
+                <input type="number" id="omv" name="omv" value="{{ listing.omv }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="arf">ARF:</label>
+                <input type="number" id="arf" name="arf" value="{{ listing.arf }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="power">Power (kW):</label>
+                <input type="number" id="power" name="power" value="{{ listing.power }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="numOwners">Number of Owners:</label>
+                <input type="number" id="numOwners" name="numOwners" value="{{ listing.numOwners }}" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="images" class="upload-label">Upload Images:</label>
+                <div class="upload-container">
+                    <input type="file" id="images" name="images" accept="image/*" multiple onchange="previewImages()">
+                    <div id="imagePreview" class="image-preview"></div> <!-- Area for image previews -->
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+    
+            <script src="{{ url_for('static', filename='create_listing_seller.js') }}"></script>
+        </form>
+    </div>
+    
+
+    
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

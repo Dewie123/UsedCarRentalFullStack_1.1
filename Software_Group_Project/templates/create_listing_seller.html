@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_create_listing_seller.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('loan_calculator_page') }}">Loan Calculator</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Create Car Listing</h1>
+        <form action="/create_listing" method="POST" enctype="multipart/form-data">  <!-- Added enctype -->
+    
+            <div class="form-group">
+                <label for="listing_type">Listing Type</label>
+                <input type="hidden" name="listing_type" id="listing_type" value="">
+                <div class="listing-options">
+                    <button type="button" id="normal_listing" class="listing-btn" onclick="selectListingType('normal')">Normal Listing</button>
+                    <button type="button" id="premium_listing" class="listing-btn" onclick="selectListingType('premium')">Premium Listing</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sellerName">Name of Seller:</label>
+                <input type="text" id="sellerName" name="sellerName" required>
+            </div>
+            <div class="form-group">
+                <label for="carName">Name of Vehicle:</label>
+                <input type="text" id="carName" name="carName" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="depreciation">Depreciation:</label>
+                <input type="number" id="depreciation" name="depreciation" required>
+            </div>
+            <div class="form-group">
+                <label for="mileage">Mileage:</label>
+                <input type="number" id="mileage" name="mileage" required>
+            </div>
+            <div class="form-group">
+                <label for="roadTax">Road Tax:</label>
+                <input type="number" id="roadTax" name="roadTax" required>
+            </div>
+            <div class="form-group">
+                <label for="deregValue">Dereg Value:</label>
+                <input type="number" id="deregValue" name="deregValue" required>
+            </div>
+            <div class="form-group">
+                <label for="coe">COE:</label>
+                <input type="number" id="coe" name="coe" required>
+            </div>
+            <div class="form-group">
+                <label for="engineCap">Engine Capacity (cc):</label>
+                <input type="number" id="engineCap" name="engineCap" required>
+            </div>
+            <div class="form-group">
+                <label for="curbWeight">Curb Weight (kg):</label>
+                <input type="number" id="curbWeight" name="curbWeight" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicleType">Type of Vehicle:</label>
+                <input type="text" id="vehicleType" name="vehicleType" required>
+            </div>
+            <div class="form-group">
+                <label for="regDate">Registration Date:</label>
+                <input type="date" id="regDate" name="regDate" required>
+            </div>
+            <div class="form-group">
+                <label for="manufactured">Manufactured Year:</label>
+                <input type="number" id="manufactured" name="manufactured" required>
+            </div>
+            <div class="form-group">
+                <label for="transmission">Transmission:</label>
+                <select id="transmission" name="transmission">
+                    <option value="auto">auto</option>
+                    <option value="manual">manual</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="omv">OMV:</label>
+                <input type="number" id="omv" name="omv" required>
+            </div>
+            <div class="form-group">
+                <label for="arf">ARF:</label>
+                <input type="number" id="arf" name="arf" required>
+            </div>
+            <div class="form-group">
+                <label for="power">Power (kW):</label>
+                <input type="number" id="power" name="power" required>
+            </div>
+            <div class="form-group">
+                <label for="numOwners">Number of Owners:</label>
+                <input type="number" id="numOwners" name="numOwners" required>
+            </div>
+            <div class="form-group">
+                <label for="images" class="upload-label">Upload Images:</label>
+                <div class="upload-container">
+                    <input type="file" id="images" name="images" accept="image/*" multiple onchange="previewImages()">
+                    <div id="imagePreview" class="image-preview"></div> <!-- Area for image previews -->
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+    
+            <script src="{{ url_for('static', filename='create_listing_seller.js') }}"></script>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Seller Name</th>
+            <th>Dealer Name</th>
+            <th>Listing Type</th>
+            <th>Price</th>
+            <th>Car Name</th>
+            <th>Depreciation</th>
+            <th>Reg Date</th>
+            <th>Mileage</th>
+            <th>Transmission</th>
+            <th>Road Tax</th>
+            <th>OMV</th>
+            <th>Dereg Value</th>
+            <th>ARF</th>
+            <th>COE</th>
+            <th>Power</th>
+            <th>Engine Cap</th>
+            <th>No. of Owners</th>
+            <th>Curb Weight</th>
+            <th>Type of Vehicle</th>
+        </tr>
+        <tr>
+            {% for listing in listing %}
+            <td>{{ listing['sellerName'] }}</td>
+            <td>{{ listing['dealerName'] }}</td>
+            <td>{{ listing['listing_type'] }}</td>
+            <td>${{ listing['price'] }}</td>
+            <td >{{ listing['carName'] }} </td>
+            <td >${{ listing['depreciation'] }} /yr</td>
+            <td>{{ listing['regDate'] }}</td>
+            <td>{{ listing['mileage'] or 'N.A.' }}</td>
+            <td>{{ listing['transmission'] }}</td>
+            <td>${{ listing['roadTax'] }} /yr</td>
+            <td>${{ listing['omv'] }}</td>
+            <td>${{ listing['deregValue'] }} </td>
+            <td>${{ listing['arf'] }}</td>
+            <td>${{ listing['coe'] }}</td>
+            <td>{{ listing['power'] }} kW</td>
+            <td>{{ listing['engineCap'] }} cc</td>
+            <td>{{ listing['numOwners'] }}</td>
+            <td>{{ listing['curbWeight'] or 'N.A.' }}</td>
+            <td>{{ listing['vehicleType'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

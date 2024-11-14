@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_view_listing_page.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="{{ url_for('index_logged_in') }}" class="logo">Car Rental</a>
+        <nav>
+            <ul>
+                <li><a href="#">Loan Calculator</a></li>
+                <li><a href="#">Log Out</a></li>
+                {% if session['user_type'] in [1] %}
+                <div class="shortlisted-cart">
+                    <button id="shortlistedCartBtn" onclick="toggleDropdown()">Shortlisted Cart</button>
+                    <div id="shortlistedDropdown" class="dropdown-content">
+                        <div id="shortlistedItems"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </ul>
+            
+        </nav>
+    </header>
+
+
+    <h1>Car Listing Details</h1>
+    {% if session['user_type'] in [1,2] %}
+    <button onclick="openReviewModal()">Buy this car</button>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h2>Leave a Review</h2>
+            <form id="reviewForm" onsubmit="submitReview(event)">
+                <label for="rating">Rating (1-5):</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+                
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+                <input type="hidden" id ="listing_id" name="listing_id" value="{{ listing['id'] }}">
+                
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    
+
+    <table>
+        <tr>
+            <td class="attribute-name">Price</td>
+            <td class="attribute-value">${{ listing['price'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Car Name</td>
+            <td class="attribute-value highlight">${{ listing['carName'] }} /yr</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Depreciation</td>
+            <td class="attribute-value highlight">${{ listing['depreciation'] }} /yr</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Reg Date</td>
+            <td class="attribute-value">{{ listing['regDate'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Mileage</td>
+            <td class="attribute-value">{{ listing['mileage'] or 'N.A.' }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Transmission</td>
+            <td class="attribute-value">{{ listing['transmission'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Road Tax</td>
+            <td class="attribute-value">${{ listing['roadTax'] }} /yr</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">OMV</td>
+            <td class="attribute-value">${{ listing['omv'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Dereg Value</td>
+            <td class="attribute-value">${{ listing['deregValue'] }} as of today (<a href="#" class="link">change</a>)</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">ARF</td>
+            <td class="attribute-value">${{ listing['arf'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">COE</td>
+            <td class="attribute-value">${{ listing['coe'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Power</td>
+            <td class="attribute-value">{{ listing['power'] }} kW </td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Engine Cap</td>
+            <td class="attribute-value">{{ listing['engineCap'] }} cc</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">No. of Owners</td>
+            <td class="attribute-value">{{ listing['numOwners'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Curb Weight</td>
+            <td class="attribute-value">{{ listing['curbWeight'] or 'N.A.' }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Reg Date</td>
+            <td class="attribute-value">{{ listing['regDate'] }}</td>
+        </tr>
+        <tr>
+            <td class="attribute-name">Type of Vehicle</td>
+            <td class="attribute-value"><a href="#" class="link">{{ listing['vehicleType'] }}</a></td>
+        </tr>
+    </table>
+    
+    <div class="image-gallery">
+       
+        <div class="thumbnail-gallery">
+            {% for image in listing['image_paths'] %}
+            <img src="{{ url_for('static', filename=image) }}">
+
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if session['user_type'] == 1 %} <!-- Check if the user is a buyer -->
+        <form action="{{ url_for('shortlist_listing') }}" method="POST">
+            <input type="hidden" name="listing_id" value="{{ listing['id'] }}">
+            <button type="submit">Like</button>
+        </form>
+    {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <script src="{{ url_for('static', filename='scripts_view_listing_page.js') }}"></script>
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+
+
+
+</body>
+</html>

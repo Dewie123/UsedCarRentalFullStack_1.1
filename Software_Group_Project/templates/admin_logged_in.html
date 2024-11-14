@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGCarMart | New & Used Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_admin_logged_in.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Car Rental</div>
+        <nav>
+            <ul>
+
+                <li><a href="{{ url_for('render_admin_logged_in_create_user_page') }}">Register User Account</a></li>
+                <li><a href="{{ url_for('render_admin_logged_in_manage_listing_page') }}">Manage Listings</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- User Management Section -->
+        <section id="manage-users">
+            <h2>Manage Users</h2>
+            <!-- Username search bar -->
+            <input type="text" placeholder="Search users..." id="user-search"> <!-- Search bar -->
+
+            <!-- User ID search bar -->
+            <input type="text" placeholder="Search by User_Type Number..." id="user-id-search">
+            
+            <!-- Bulk deactivate / suspend functionality -->
+            <input type="text" placeholder="Enter user type to deactivate" id="bulk-deactivate-user-type">
+            <button id="bulk-deactivate-btn">Deactivate Users by Type</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Profile Picture</th>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Phone Number</th>
+                        <th>User Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in user_profiles %}
+                    <tr id="user-row-{{ user[0] }}">
+                        <td>
+                            <img src="{{ user[8] }}" alt="Profile Picture" width="50" height="50">
+                        </td>
+                        <td class="editable" data-field="user_id">{{ user[0] }}</td>
+                        <td class="editable" data-field="username">{{ user[1] }}</td>
+                        <td class="editable" data-field="password">{{ user[2] }}</td>
+                        <td class="editable" data-field="email">{{ user[5] }}</td>
+                        <td class="editable" data-field="name">{{ user[4] }}</td>
+                        <td class="editable" data-field="description">{{ user[7] }}</td>
+                        <td class="editable" data-field="phone_number">{{ user[6] }}</td>
+                        <td class="editable" data-field="user_type">{{ user[3] }}</td>
+                        <td class="editable" data-field="status" class="status">{{ user[9] }}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="save-btn" style="display:none;">Save</button>
+                            <button class="deactivate-btn">Deactivate</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="manage-users">
+            <h2>User Type Permissions Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Type</th>
+                        <th>Create Listing</th>
+                        <th>Delete Listing</th>
+                        <th>Update Listing</th>
+                        <th>View Listing</th>
+                        <th>User Type Name</th>
+                        <th>Actions</th> <!-- Added for edit/save buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for perms in user_type_permissions %}
+                    <tr data-id="{{ perms[0] }}">
+                        <td class="editable1" data-field="user_type">{{ perms[1] }}</td>
+                        <td class="editable1" data-field="create_listing">{{ perms[2] }}</td>
+                        <td class="editable1" data-field="delete_listing">{{ perms[3] }}</td>
+                        <td class="editable1" data-field="update_listing">{{ perms[4] }}</td>
+                        <td class="editable1" data-field="view_listing">{{ perms[5] }}</td>
+                        <td class="editable1" data-field="user_type_name">{{ perms[6] }}</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="save-btn" style="display:none;">Save</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        
+
+        <!-- Add User Type Button -->
+        <button id="add-user-type-btn">Add User Type</button>
+
+        <!-- Add User Type Modal -->
+        <div id="add-user-type-modal" style="display: none;">
+            <h2>Add User Type</h2>
+            <form id="add-user-type-form">
+                <label for="user_type">User Type ID:</label>
+                <input type="number" id="user_type" name="user_type" required>
+
+                <label for="user_type_name">User Type Name:</label>
+                <input type="text" id="user_type_name" name="user_type_name" required>
+
+                <label for="create_listing">Create Listing Permission:</label>
+                <input type="checkbox" id="create_listing" name="create_listing">
+
+                <label for="delete_listing">Delete Listing Permission:</label>
+                <input type="checkbox" id="delete_listing" name="delete_listing">
+
+                <label for="update_listing">Update Listing Permission:</label>
+                <input type="checkbox" id="update_listing" name="update_listing">
+
+                <label for="view_listing">View Listing Permission:</label>
+                <input type="checkbox" id="view_listing" name="view_listing">
+
+                <button type="submit">Add User Type</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+
+
+        
+
+        <!-- Reports Section (Optional) -->
+        
+    </main>
+
+    
+    <footer>
+        <p>© 2024 ProjectManagers. All Rights Reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script_admin_logged_in.js') }}"></script>
+    
+
+</body>
+</html>
